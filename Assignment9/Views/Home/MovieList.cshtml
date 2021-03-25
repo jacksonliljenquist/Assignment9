@@ -1,0 +1,68 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IQueryable<FilmInfo>
+<style>
+    table, th, td {
+        padding: 15px;
+        align-content: center;
+    }
+    /*BOOTSTRAP #1 Adding in alternating colors to differentiate rows */
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+</style>
+<h1>This is working</h1>
+<table style="width: 100%; height:100%;">
+    <tr>
+        <th>Category</th>
+        <th>Title</th>
+        <th>Year</th>
+        <th>Director</th>
+        <th>Rating</th>
+        <th>Edited</th>
+        <th>Lent To</th>
+        <th>Notes</th>
+    </tr>
+    
+        @foreach (var x in Model)
+        {
+            if (x.Title == "Independence Day")
+            {
+                continue;
+            }
+
+            else
+            {
+            <tr>
+                <td>@x.Category</td>
+                <td>@x.Title </td>
+                <td>@x.Year </td>
+                <td>@x.Director</td>
+                <td>@x.Rating</td>
+                <td>@x.Edited</td>
+                <td>@x.LentTo</td>
+                <td>@x.Notes</td>
+                <td>
+                    <form>
+                        <input value="@x.FilmID" type="hidden" name="id" />
+                        <input type="submit" asp-action="Delete" value="Delete"/>
+                    </form>
+                </td>
+                <td>
+                    <form>
+                        <input value="@x.FilmID" type="hidden" name="id" />
+                        <input type="submit" asp-action="Update" value="Update" />
+                    </form>
+                </td>
+            </tr>
+            }
+
+        }
+
+    </table>
+
